@@ -1,1 +1,13 @@
-<div id="root"></div><script type="module" src="/src/main.jsx"></script>
+import React,{useState} from 'react';
+const qs=[['I','Lebih suka menulis','E','Lebih suka berbicara'],['S','Praktis','N','Konseptual'],['T','Objektif','F','Empatik'],['J','Terencana','P','Spontan']];
+export default function App(){const[a,setA]=useState({}); const[r,setR]=useState(null);
+const calc=()=>{let s={I:0,E:0,S:0,N:0,T:0,F:0,J:0,P:0}; Object.values(a).forEach(v=>s[v]++);
+const t=(s.I>=s.E?'I':'E')+(s.S>=s.N?'S':'N')+(s.T>=s.F?'T':'F')+(s.J>=s.P?'J':'P'); setR(t);}
+return <div style={{maxWidth:700,margin:'20px auto',fontFamily:'Arial'}}>
+<h1>Tes MBTI Sederhana</h1>{r&&<h2>Hasil: {r}</h2>}
+{qs.map((q,i)=><div key={i} style={{border:'1px solid #ccc',padding:12,borderRadius:8,marginBottom:10}}>
+<div>Pertanyaan {i+1}</div>
+<label><input type='radio' name={'q'+i} onChange={()=>setA({...a,[i]:q[0]})}/> {q[1]}</label><br/>
+<label><input type='radio' name={'q'+i} onChange={()=>setA({...a,[i]:q[2]})}/> {q[3]}</label>
+</div>)}
+<button onClick={calc}>Lihat Hasil</button></div>}
